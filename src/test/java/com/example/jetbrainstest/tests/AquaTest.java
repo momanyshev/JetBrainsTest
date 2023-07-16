@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MyExtension.class)
 public class AquaTest extends BaseTest {
 
-    private AquaPage aquaPage = new AquaPage(getDriver());
-    private AquaDownloadPage aquaDownloadPage = new AquaDownloadPage(getDriver());
+    private final AquaPage aquaPage = new AquaPage(getDriver());
+    private final AquaDownloadPage aquaDownloadPage = new AquaDownloadPage(getDriver());
 
     @BeforeEach
     @Override
