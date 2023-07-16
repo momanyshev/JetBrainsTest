@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MyExtension.class)
 public class AquaTest extends BaseTest {
 
-    private AquaPage aquaPage;
-    private AquaDownloadPage aquaDownloadPage;
+    private AquaPage aquaPage = new AquaPage(getDriver());
+    private AquaDownloadPage aquaDownloadPage = new AquaDownloadPage(getDriver());
 
     @BeforeEach
     @Override
@@ -26,8 +26,6 @@ public class AquaTest extends BaseTest {
     public void setUp() {
         super.setUp();
         getDriver().get("https://www.jetbrains.com/aqua/");
-        aquaPage = new AquaPage(getDriver());
-        aquaDownloadPage = new AquaDownloadPage(getDriver());
     }
 
     @Test
@@ -92,22 +90,21 @@ public class AquaTest extends BaseTest {
         assertTrue(aquaDownloadPage.downloadIDEButton(num), "Кнопка Download IDE для " + name + " не кликабельная");
     }
 
-    // не смог вставить в @CsvSource текст с запятой, поэтому сменил assertEquals на assertTrue
     @ParameterizedTest(name = "{index} - для {1}")
     @DisplayName("Проверка первого пункта из списка системных требований")
-    @CsvSource({"0, Windows, 64-bit version of Windows 10 1809 and later",
-            "1, macOS, macOS 10.15 and later",
-            "2, Linux, GNOME or KDE desktop"})
+    @CsvSource(value = {"0; Windows; 64-bit version of Windows 10 1809 and later, or Windows Server 2019 and later",
+            "1; macOS; macOS 10.15 and later",
+            "2; Linux; GNOME or KDE desktop"}, delimiter = ';')
     public void systemRequirementsFirstParameter(int num, String name, String firstPoint) {
         aquaPage.downloadAquaButtonClick();
-        assertTrue(aquaDownloadPage.systemRequirementsPopupWindow(num).contains(firstPoint), "Отображен неверный пункт системных требований для " + name);
+        assertEquals(firstPoint, aquaDownloadPage.systemRequirementsPopupWindow(num), "Отображен неверный пункт системных требований для " + name);
     }
 
     @ParameterizedTest(name = "{index} - для {1}")
     @DisplayName("Проверка первого пункта из инструкции по установке")
     @CsvSource({"0, Windows, Run the aqua-2023.1.exe file that starts the Installation Wizard",
             "1, macOS, Download the aqua-2023.1.dmg macOS Disk Image file",
-            "2, Linux, Unpack the aqua-2023.1.tar.gz file to an empty directory using the following command: tar -xzf aqua-2023.1.tar.gz"})
+            "2, Linux, Note: A new instance MUST NOT be extracted over an existing one. The target folder must be empty."})
     public void installationInstructionsFirstParameter(int num, String name, String firstPoint) {
         aquaPage.downloadAquaButtonClick();
         assertTrue(aquaDownloadPage.installationInstructionsPopupWindow(num).contains(firstPoint), "Отображена неверная инструкция по установке для " + name);

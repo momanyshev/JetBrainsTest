@@ -24,7 +24,7 @@ public class AquaPage {
     private WebElement downloadAquaButton;
     @FindBy(xpath = "//a[@href='/aqua/features/' and text()='Features']")
     private WebElement featuresAquaButton;
-    @FindBy(xpath = "//a[@href='/help/aqua/2022.3/getting-started-aqua.html' and text()='Documentation']")
+    @FindBy(xpath = "//div[@id=\"js-menu-second-desktop\"]//a[text()='Documentation']")
     private WebElement documentationAquaButton;
     @FindBy(xpath = "//a[@href='/aqua/download/' and text()='Download Preview']")
     private WebElement downloadPreviewButton;

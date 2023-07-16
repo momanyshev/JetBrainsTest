@@ -52,21 +52,21 @@
 Иначе выводить сообщение: "Кнопка Download IDE для {второе значение набора данных} не кликабельная"
 
 10.    @DisplayName("Проверка первого пункта из списка системных требований") - параметризованный тест
-Набор данных - @CsvSource({"0, Windows, 64-bit version of Windows 10 1809 and later",
-						   "1, macOS, macOS 10.15 and later",
-						   "2, Linux, GNOME or KDE desktop"})
+Набор данных - @CsvSource({"0; Windows; 64-bit version of Windows 10 1809 and later, or Windows Server 2019 and later",
+						   "1; macOS; macOS 10.15 and later",
+						   "2; Linux; GNOME or KDE desktop"})
 Нажимаем на кнопку "Download Preview", осуществляется переход на
 страницу /aqua/download/.
 Нажимаем на элемент div с аттрибутом role = 'tab' под индексом, равным первому значению набора данных.
 Нажимаем на элемент span, содержащий текст "System requirements" под индексом, равным первому значению набора данных.
 Осуществляется проверка: текст первого элемента с атрибутом data-test = 'system-requirements-list'
-содержит третье значение набора данных.
+равен третьему значению набора данных.
 Иначе выводить сообщение: "Отображен неверный пункт системных требований для {второе значение набора данных}"
 
 11.    @DisplayName("Проверка первого пункта из инструкции по установке") - параметризованный тест
 Набор данных - @CsvSource({"0, Windows, Run the aqua-2023.1.exe file that starts the Installation Wizard",
 						   "1, macOS, Download the aqua-2023.1.dmg macOS Disk Image file",
-						   "2, Linux, Unpack the aqua-2023.1.tar.gz file to an empty directory using the following command: tar -xzf aqua-2023.1.tar.gz"})
+						   "2, Linux, Note: A new instance MUST NOT be extracted over an existing one. The target folder must be empty."})
 Нажимаем на кнопку "Download Preview", осуществляется переход на
 страницу /aqua/download/.
 Нажимаем на элемент span с аттрибутом role = 'tab' под индексом, равным первому значению набора данных.
