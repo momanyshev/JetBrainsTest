@@ -18,7 +18,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
         if (driver == null)
             createDriver();
         if (driver.toString().contains("null"))
@@ -26,7 +26,7 @@ public class BaseTest {
         return driver;
     }
 
-    private static void createDriver(){
+    private static void createDriver() {
         ChromeOptions options = new ChromeOptions();
         // Fix the issue https://github.com/SeleniumHQ/selenium/issues/11750
         options.addArguments("--remote-allow-origins=*");
